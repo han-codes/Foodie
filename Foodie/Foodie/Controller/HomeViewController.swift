@@ -11,8 +11,8 @@ class HomeViewController: UIViewController {
 
     // MARK: - UI Properties
     
-    let mealSuggestionView: UIView = {
-        let view = UIView()
+    let mealSuggestionView: MealSuggestionsView = {
+        let view = MealSuggestionsView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .blue
         return view
