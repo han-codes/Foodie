@@ -97,12 +97,11 @@
 		F3A30D392773AADC00161F18 /* Foodie */ = {
 			isa = PBXGroup;
 			children = (
-				F3A30D3A2773AADC00161F18 /* AppDelegate.swift */,
-				F3A30D3C2773AADC00161F18 /* SceneDelegate.swift */,
-				F3A30D3E2773AADC00161F18 /* HomeViewController.swift */,
-				F3A30D432773AADE00161F18 /* Assets.xcassets */,
-				F3A30D452773AADE00161F18 /* LaunchScreen.storyboard */,
-				F3A30D482773AADE00161F18 /* Info.plist */,
+				F3A30D6A2773AEC700161F18 /* Model */,
+				F3A30D6C2773AED200161F18 /* Controller */,
+				F3A30D6B2773AECE00161F18 /* View */,
+				F3A30D6E2773AF2500161F18 /* Utility */,
+				F3A30D6D2773AEDC00161F18 /* Supporting Files */,
 			);
 			path = Foodie;
 			sourceTree = "<group>";
@@ -122,6 +121,47 @@
 				F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */,
 			);
 			path = FoodieUITests;
+			sourceTree = "<group>";
+		};
+		F3A30D6A2773AEC700161F18 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F3A30D6B2773AECE00161F18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F3A30D6C2773AED200161F18 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F3A30D3E2773AADC00161F18 /* HomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F3A30D6D2773AEDC00161F18 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F3A30D3A2773AADC00161F18 /* AppDelegate.swift */,
+				F3A30D3C2773AADC00161F18 /* SceneDelegate.swift */,
+				F3A30D432773AADE00161F18 /* Assets.xcassets */,
+				F3A30D452773AADE00161F18 /* LaunchScreen.storyboard */,
+				F3A30D482773AADE00161F18 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F3A30D6E2773AF2500161F18 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,7 +469,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C62Y8SVBJ2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Foodie/Info.plist;
+				INFOPLIST_FILE = "Foodie/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -457,7 +497,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C62Y8SVBJ2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Foodie/Info.plist;
+				INFOPLIST_FILE = "Foodie/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
