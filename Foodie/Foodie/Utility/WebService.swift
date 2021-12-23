@@ -14,7 +14,7 @@ class WebService {
         case POST
     }
     
-    static func fetchRandomMeal(completion: @escaping (MealResponse?, Error?) -> Void) {
+    static func fetchRandomMealDetails(completion: @escaping (MealDetails?, Error?) -> Void) {
         
         guard let randomMealURL = URL(string: Constants.API.URL.randomMealURL) else {
             print("Unable to unwrap a valid URL for fetching a random meal")
@@ -35,8 +35,15 @@ class WebService {
                 if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
                     print(jsonResult)
                 }
-                let randomMeal = try JSONDecoder().decode(MealResponse.self, from: data)
-                completion(randomMeal, nil)
+                
+                let mealResponse = try JSONDecoder().decode(MealResponse.self, from: data)
+                
+                if let mealDetails = mealResponse.mealDetails.first {
+                    completion(mealDetails, nil)
+                }
+                else {
+                    completion(nil, CommonError.missingData)
+                }
             }
             catch {
                 print("Failed to decode meal response with error: \(error.localizedDescription)")

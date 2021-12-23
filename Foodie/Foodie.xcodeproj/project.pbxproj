@@ -21,6 +21,7 @@
 		F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */; };
 		F3EC1AA92775092F003AB645 /* MealResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AA82775092F003AB645 /* MealResponse.swift */; };
 		F3EC1AAB27750943003AB645 /* MealDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAA27750943003AB645 /* MealDetails.swift */; };
+		F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAC27750E8C003AB645 /* CommonError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSuggestionsView.swift; sourceTree = "<group>"; };
 		F3EC1AA82775092F003AB645 /* MealResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealResponse.swift; sourceTree = "<group>"; };
 		F3EC1AAA27750943003AB645 /* MealDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetails.swift; sourceTree = "<group>"; };
+		F3EC1AAC27750E8C003AB645 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			children = (
 				F396616E2774053000FCDE31 /* Constants.swift */,
 				F396617027742FDE00FCDE31 /* WebService.swift */,
+				F3EC1AAC27750E8C003AB645 /* CommonError.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */,
 				F3EC1AA92775092F003AB645 /* MealResponse.swift in Sources */,
 				F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */,
+				F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */,
 				F3A30D3B2773AADC00161F18 /* AppDelegate.swift in Sources */,
 				F3A30D3D2773AADC00161F18 /* SceneDelegate.swift in Sources */,
 				F3EC1AAB27750943003AB645 /* MealDetails.swift in Sources */,

@@ -34,10 +34,20 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         setUpNavigationBar()
         setUpSubviews()
-        WebService.fetchRandomMeal { randomMeal, error in
-            print("RANDOM MEAL: \(randomMeal)")
-            print("INGREDIENTS: \(randomMeal?.mealDetails.first?.ingredients)")
-            print("ERROR: \(error?.localizedDescription)")
+        
+        WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
+            guard let mealDetails = randomMealDetails, error == nil else {
+                print("Fetch random meal details failed with error: \(String(describing: error?.localizedDescription))")
+                // TODO: Present error alert
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
+                    self?.mealSuggestionView.imageView.image = UIImage(data: data)
+                }
+                self?.mealSuggestionView.titleLabel.text = mealDetails.name
+            }
         }
     }
 

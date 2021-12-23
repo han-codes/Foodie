@@ -13,12 +13,14 @@ struct MealDetails: Decodable {
     let category: String
     let instructions: String
     let ingredients: [String]
+    let thumbnailURL: URL
     
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"
         case name = "strMeal"
         case category = "strCategory"
         case instructions = "strInstructions"
+        case thumbnail = "strMealThumb"
     }
     
     struct IngredientKeys: CodingKey {
@@ -39,6 +41,14 @@ struct MealDetails: Decodable {
         name = try container.decode(String.self, forKey: .name)
         category = try container.decode(String.self, forKey: .category)
         instructions = try container.decode(String.self, forKey: .instructions)
+        let thumbnailStr = try container.decode(String.self, forKey: .thumbnail)
+        
+        if let thumbnailURL = URL(string: thumbnailStr) {
+            self.thumbnailURL = thumbnailURL
+        }
+        else {
+            throw CommonError.invalidURL
+        }
         
         let ingredientsContainer = try decoder.container(keyedBy: IngredientKeys.self)
         
