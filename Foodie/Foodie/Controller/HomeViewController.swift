@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     let mealSuggestionView: MealSuggestionsView = {
         let view = MealSuggestionsView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
         return view
     }()
     
