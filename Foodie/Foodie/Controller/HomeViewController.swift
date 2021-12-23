@@ -34,6 +34,11 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         setUpNavigationBar()
         setUpSubviews()
+        WebService.fetchRandomMeal { randomMeal, error in
+            print("RANDOM MEAL: \(randomMeal)")
+            print("INGREDIENTS: \(randomMeal?.mealDetails.first?.ingredients)")
+            print("ERROR: \(error?.localizedDescription)")
+        }
     }
 
     // MARK: - UI Setup
