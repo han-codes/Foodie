@@ -17,11 +17,13 @@ class HomeViewController: UIViewController {
         return view
     }()
     
-    let mealCategoriesView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
-        return view
+    lazy var mealCategoryTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ImageWithLabelTableViewCell.self, forCellReuseIdentifier: ImageWithLabelTableViewCell.cellID)
+        return tableView
     }()
     
     // MARK: - Lifecycle Methods
@@ -43,7 +45,7 @@ class HomeViewController: UIViewController {
     private func setUpSubviews() {
         
         view.addSubview(mealSuggestionView)
-        view.addSubview(mealCategoriesView)
+        view.addSubview(mealCategoryTableView)
         
         NSLayoutConstraint.activate([
             mealSuggestionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -52,10 +54,28 @@ class HomeViewController: UIViewController {
             
             mealSuggestionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/5),
 
-            mealCategoriesView.topAnchor.constraint(equalTo: mealSuggestionView.bottomAnchor, constant: 75),
-            mealCategoriesView.leadingAnchor.constraint(equalTo: mealSuggestionView.leadingAnchor),
-            mealCategoriesView.trailingAnchor.constraint(equalTo: mealSuggestionView.trailingAnchor),
-            mealCategoriesView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mealCategoryTableView.topAnchor.constraint(equalTo: mealSuggestionView.bottomAnchor, constant: 75),
+            mealCategoryTableView.leadingAnchor.constraint(equalTo: mealSuggestionView.leadingAnchor),
+            mealCategoryTableView.trailingAnchor.constraint(equalTo: mealSuggestionView.trailingAnchor),
+            mealCategoryTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+}
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
+
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
+            assertionFailure("Expected to dequeue \(ImageWithLabelTableViewCell.self)")
+            return UITableViewCell()
+        }
+        
+        return cell
     }
 }
