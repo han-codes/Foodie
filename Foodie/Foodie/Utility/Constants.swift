@@ -16,6 +16,7 @@ struct Constants {
         struct Path {
             static let random = "/random.php"
             static let lookup = "/lookup.php?i="
+            static let categories = "/categories.php"
         }
         
         struct URL {
@@ -24,6 +25,7 @@ struct Constants {
             }
             
             static let randomMealURL = baseURL + Path.random
+            static let mealCategoriesURL = baseURL + Path.categories
         }
     }
 }

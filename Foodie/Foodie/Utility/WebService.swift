@@ -15,7 +15,6 @@ class WebService {
     }
     
     static func fetchRandomMealDetails(completion: @escaping (MealDetails?, Error?) -> Void) {
-        
         guard let randomMealURL = URL(string: Constants.API.URL.randomMealURL) else {
             print("Unable to unwrap a valid URL for fetching a random meal")
             return
@@ -25,17 +24,14 @@ class WebService {
         request.httpMethod = WebService.HTTPMethod.GET.rawValue
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
             
+            try? prettyPrintJSON(data: data)
+            
             do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    print(jsonResult)
-                }
-                
                 let mealResponse = try JSONDecoder().decode(MealResponse.self, from: data)
                 
                 if let mealDetails = mealResponse.mealDetails.first {
@@ -50,5 +46,39 @@ class WebService {
                 completion(nil, error)
             }
         }.resume()
+    }
+    
+    static func fetchMealCategories(completion: @escaping ([MealCategory]?, Error?) -> Void) {
+        guard let categoriesURL = URL(string: Constants.API.URL.mealCategoriesURL) else {
+            print("Unable to unwrap a valid URL for fetching meal categories")
+            return
+        }
+        
+        var request = URLRequest(url: categoriesURL)
+        request.httpMethod = WebService.HTTPMethod.GET.rawValue
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            try? prettyPrintJSON(data: data)
+            
+            do {
+                let mealCategoryResponse = try JSONDecoder().decode(MealCategoryResponse.self, from: data)
+                completion(mealCategoryResponse.categories, nil)
+            }
+            catch {
+                print("Failed to decode meal category response with error: \(error.localizedDescription)")
+                completion(nil, error)
+            }
+        }.resume()
+    }
+    
+    private static func prettyPrintJSON(data: Data, options: JSONSerialization.ReadingOptions = []) throws {
+        if let jsonResult = try JSONSerialization.jsonObject(with: data, options: options) as? NSDictionary {
+            print(jsonResult)
+        }
     }
 }

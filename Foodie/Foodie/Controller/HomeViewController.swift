@@ -26,6 +26,10 @@ class HomeViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Properties
+    
+    var categories: [MealCategory]?
+    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -47,6 +51,19 @@ class HomeViewController: UIViewController {
                     self?.mealSuggestionView.imageView.image = UIImage(data: data)
                 }
                 self?.mealSuggestionView.titleLabel.text = mealDetails.name
+            }
+        }
+        
+        WebService.fetchMealCategories { [weak self] categories, error in
+            guard let categories = categories, error == nil else {
+                print("Fetch meal categories failed with error: \(String(describing: error?.localizedDescription))")
+                // TODO: Present error alert
+                return
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.categories = categories
+                self?.mealCategoryTableView.reloadData()
             }
         }
     }
@@ -86,10 +103,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
-            assertionFailure("Expected to dequeue \(ImageWithLabelTableViewCell.self)")
+        guard let category = categories?[indexPath.row], let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
             return UITableViewCell()
         }
+        
+        
+        if let data = try? Data(contentsOf: category.thumbnailURL) {
+            cell.leftImageView.image = UIImage(data: data)
+        }
+        
+        cell.titleLabel.text = category.title
         
         return cell
     }
