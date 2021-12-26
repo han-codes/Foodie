@@ -20,6 +20,7 @@
 		F3A30D5C2773AADE00161F18 /* FoodieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */; };
 		F3A30D5E2773AADE00161F18 /* FoodieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */; };
 		F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */; };
+		F3B1552C2779231B00AB9523 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */; };
 		F3EC1AA92775092F003AB645 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AA82775092F003AB645 /* Meal.swift */; };
 		F3EC1AAB27750943003AB645 /* MealDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAA27750943003AB645 /* MealDetails.swift */; };
 		F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAC27750E8C003AB645 /* CommonError.swift */; };
@@ -62,6 +63,7 @@
 		F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITests.swift; sourceTree = "<group>"; };
 		F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSuggestionsView.swift; sourceTree = "<group>"; };
+		F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
 		F3EC1AA82775092F003AB645 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		F3EC1AAA27750943003AB645 /* MealDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetails.swift; sourceTree = "<group>"; };
 		F3EC1AAC27750E8C003AB645 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				F3A30D3E2773AADC00161F18 /* HomeViewController.swift */,
 				AE2A4CE827768A6C0040F0EF /* MealsViewController.swift */,
+				F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */,
 				F3EC1AA92775092F003AB645 /* Meal.swift in Sources */,
 				F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */,
+				F3B1552C2779231B00AB9523 /* MealDetailsViewController.swift in Sources */,
 				F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */,
 				F3A30D3B2773AADC00161F18 /* AppDelegate.swift in Sources */,
 				F3A30D3D2773AADC00161F18 /* SceneDelegate.swift in Sources */,

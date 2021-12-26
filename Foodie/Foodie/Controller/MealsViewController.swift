@@ -38,7 +38,6 @@ class MealsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -83,5 +82,10 @@ extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return meals.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Network request to fetch meal details
+        navigationController?.pushViewController(MealDetailsViewController(), animated: true)
     }
 }
