@@ -7,6 +7,19 @@
 
 import Foundation
 
+struct MealDetailResponse: Decodable {
+    let mealDetails: [MealDetails]
+    
+    enum CodingKeys: String, CodingKey {
+        case mealDetails = "meals"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        mealDetails = try container.decode([MealDetails].self, forKey: .mealDetails)
+    }
+}
+
 struct MealDetails: Decodable {
     let id: String
     let name: String
@@ -41,8 +54,8 @@ struct MealDetails: Decodable {
         name = try container.decode(String.self, forKey: .name)
         category = try container.decode(String.self, forKey: .category)
         instructions = try container.decode(String.self, forKey: .instructions)
-        let thumbnailStr = try container.decode(String.self, forKey: .thumbnail)
         
+        let thumbnailStr = try container.decode(String.self, forKey: .thumbnail)
         if let thumbnailURL = URL(string: thumbnailStr) {
             self.thumbnailURL = thumbnailURL
         }

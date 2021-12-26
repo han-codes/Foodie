@@ -20,10 +20,10 @@
 		F3A30D5C2773AADE00161F18 /* FoodieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */; };
 		F3A30D5E2773AADE00161F18 /* FoodieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */; };
 		F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */; };
-		F3EC1AA92775092F003AB645 /* MealResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AA82775092F003AB645 /* MealResponse.swift */; };
+		F3EC1AA92775092F003AB645 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AA82775092F003AB645 /* Meal.swift */; };
 		F3EC1AAB27750943003AB645 /* MealDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAA27750943003AB645 /* MealDetails.swift */; };
 		F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAC27750E8C003AB645 /* CommonError.swift */; };
-		F3EC1AAF27751006003AB645 /* MealCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAE27751006003AB645 /* MealCategoryResponse.swift */; };
+		F3EC1AAF27751006003AB645 /* MealCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AAE27751006003AB645 /* MealCategory.swift */; };
 		F3EC1AB227766057003AB645 /* JSONSerialization+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC1AB127766057003AB645 /* JSONSerialization+Convenience.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,10 +62,10 @@
 		F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITests.swift; sourceTree = "<group>"; };
 		F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSuggestionsView.swift; sourceTree = "<group>"; };
-		F3EC1AA82775092F003AB645 /* MealResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealResponse.swift; sourceTree = "<group>"; };
+		F3EC1AA82775092F003AB645 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		F3EC1AAA27750943003AB645 /* MealDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetails.swift; sourceTree = "<group>"; };
 		F3EC1AAC27750E8C003AB645 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
-		F3EC1AAE27751006003AB645 /* MealCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCategoryResponse.swift; sourceTree = "<group>"; };
+		F3EC1AAE27751006003AB645 /* MealCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCategory.swift; sourceTree = "<group>"; };
 		F3EC1AB127766057003AB645 /* JSONSerialization+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,9 +146,9 @@
 		F3A30D6A2773AEC700161F18 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F3EC1AA82775092F003AB645 /* MealResponse.swift */,
+				F3EC1AA82775092F003AB645 /* Meal.swift */,
 				F3EC1AAA27750943003AB645 /* MealDetails.swift */,
-				F3EC1AAE27751006003AB645 /* MealCategoryResponse.swift */,
+				F3EC1AAE27751006003AB645 /* MealCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,9 +336,9 @@
 				F396617127742FDE00FCDE31 /* WebService.swift in Sources */,
 				AE2A4CE927768A6C0040F0EF /* MealsViewController.swift in Sources */,
 				F3EC1AB227766057003AB645 /* JSONSerialization+Convenience.swift in Sources */,
-				F3EC1AAF27751006003AB645 /* MealCategoryResponse.swift in Sources */,
+				F3EC1AAF27751006003AB645 /* MealCategory.swift in Sources */,
 				F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */,
-				F3EC1AA92775092F003AB645 /* MealResponse.swift in Sources */,
+				F3EC1AA92775092F003AB645 /* Meal.swift in Sources */,
 				F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */,
 				F3EC1AAD27750E8C003AB645 /* CommonError.swift in Sources */,
 				F3A30D3B2773AADC00161F18 /* AppDelegate.swift in Sources */,

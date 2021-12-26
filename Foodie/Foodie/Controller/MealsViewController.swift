@@ -22,12 +22,14 @@ class MealsViewController: UIViewController {
     
     // MARK: - Properties
     
+    let meals: [Meal]
     let category: MealCategory
     
     // MARK: - Initializer
     
-    init(category: MealCategory) {
+    init(category: MealCategory, meals: [Meal]) {
         self.category = category
+        self.meals = meals
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,13 +44,14 @@ class MealsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "BEEF"
+        navigationItem.title = category.title
         setUpUI()
     }
     
     // MARK: - UI Setup
     
     private func setUpUI() {
+        view.backgroundColor = .white
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -63,22 +66,22 @@ class MealsViewController: UIViewController {
 extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
             return UITableViewCell()
         }
         
+        let meal = meals[indexPath.row]
         
-        if let data = try? Data(contentsOf: category.thumbnailURL) {
+        if let data = try? Data(contentsOf: meal.thumbnailURL) {
             cell.leftImageView.image = UIImage(data: data)
         }
         
-        cell.titleLabel.text = category.title
+        cell.titleLabel.text = meal.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return meals.count
     }
 }

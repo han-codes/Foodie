@@ -32,7 +32,7 @@ class WebService {
             try? prettyPrintJSON(data: data)
             
             do {
-                let mealResponse = try JSONDecoder().decode(MealResponse.self, from: data)
+                let mealResponse = try JSONDecoder().decode(MealDetailResponse.self, from: data)
                 
                 if let mealDetails = mealResponse.mealDetails.first {
                     completion(mealDetails, nil)
@@ -76,8 +76,7 @@ class WebService {
         }.resume()
     }
     
-    static func fetchMealsByCategory(_ category: String) {
-        
+    static func fetchMealsByCategory(_ category: String, completion: @escaping ([Meal]?, Error?) -> Void) {
         guard let mealsByCategoryURL = Constants.API.URLs.lookupMealsByCategoryURL(category) else {
             print("Unable to unwrap a valid URL for fetching meals by a category")
             return
@@ -92,6 +91,15 @@ class WebService {
             }
             
             try? prettyPrintJSON(data: data)
+            
+            do {
+                let mealCategoryResponse = try JSONDecoder().decode(MealResponse.self, from: data)
+                completion(mealCategoryResponse.meals, nil)
+            }
+            catch {
+                print("Failed to decode meal response with error: \(error.localizedDescription)")
+                completion(nil, error)
+            }
         }.resume()
     }
     

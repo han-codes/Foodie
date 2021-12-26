@@ -99,7 +99,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return categories?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,10 +118,19 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Make network request for meals for the selected category
         if let selectedCategory = categories?[indexPath.row] {
-            WebService.fetchMealsByCategory(selectedCategory.title)
-            navigationController?.pushViewController(MealsViewController(category: selectedCategory), animated: true)
+            WebService.fetchMealsByCategory(selectedCategory.title) { [weak self] meals, error in
+                guard let meals = meals, error == nil else {
+                    print("Fetching meals failed with error: \(String(describing: error?.localizedDescription))")
+                    // TODO: Present error alert
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
+                }
+            }
+            
         }
     }
 }
