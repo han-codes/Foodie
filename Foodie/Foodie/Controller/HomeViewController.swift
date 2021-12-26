@@ -119,8 +119,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Make network request for meals for the selected category
-        
         if let selectedCategory = categories?[indexPath.row] {
+            WebService.fetchMealsByCategory(selectedCategory.title)
             navigationController?.pushViewController(MealsViewController(category: selectedCategory), animated: true)
         }
     }

@@ -15,7 +15,7 @@ class WebService {
     }
     
     static func fetchRandomMealDetails(completion: @escaping (MealDetails?, Error?) -> Void) {
-        guard let randomMealURL = URL(string: Constants.API.URL.randomMealURL) else {
+        guard let randomMealURL = URL(string: Constants.API.URLString.randomMealURL) else {
             print("Unable to unwrap a valid URL for fetching a random meal")
             return
         }
@@ -49,7 +49,7 @@ class WebService {
     }
     
     static func fetchMealCategories(completion: @escaping ([MealCategory]?, Error?) -> Void) {
-        guard let categoriesURL = URL(string: Constants.API.URL.mealCategoriesURL) else {
+        guard let categoriesURL = URL(string: Constants.API.URLString.mealCategoriesURL) else {
             print("Unable to unwrap a valid URL for fetching meal categories")
             return
         }
@@ -73,6 +73,43 @@ class WebService {
                 print("Failed to decode meal category response with error: \(error.localizedDescription)")
                 completion(nil, error)
             }
+        }.resume()
+    }
+    
+    static func fetchMealsByCategory(_ category: String) {
+        
+        guard let mealsByCategoryURL = Constants.API.URLs.lookupMealsByCategoryURL(category) else {
+            print("Unable to unwrap a valid URL for fetching meals by a category")
+            return
+        }
+        
+        var request = URLRequest(url: mealsByCategoryURL)
+        request.httpMethod = WebService.HTTPMethod.GET.rawValue
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            try? prettyPrintJSON(data: data)
+        }.resume()
+    }
+    
+    static func fetchMealDetails(usingId id: String) {
+        guard let mealDetailsURL = Constants.API.URLs.lookupMealURL(usingID: id) else {
+            print("Unable to unwrap a valid URL for fetching meal details")
+            return
+        }
+        
+        var request = URLRequest(url: mealDetailsURL)
+        request.httpMethod = WebService.HTTPMethod.GET.rawValue
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            try? prettyPrintJSON(data: data)
         }.resume()
     }
     
