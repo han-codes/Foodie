@@ -116,4 +116,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: Make network request for meals for the selected category
+        
+        if let selectedCategory = categories?[indexPath.row] {
+            navigationController?.pushViewController(MealsViewController(category: selectedCategory), animated: true)
+        }
+    }
 }

@@ -13,8 +13,8 @@ class ImageWithLabelTableViewCell: UITableViewCell {
     
     let leftImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .checkmark
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = .checkmark
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -23,7 +23,7 @@ class ImageWithLabelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Beef"
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .left
         return label
     }()
@@ -52,17 +52,19 @@ class ImageWithLabelTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            leftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            leftImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            leftImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            leftImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            leftImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             leftImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 75),
-            leftImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 100),
-            leftImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 100),
-            
-            titleLabel.topAnchor.constraint(equalTo: leftImageView.topAnchor),
+            leftImageView.widthAnchor.constraint(equalToConstant: 120),
+
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leftImageView.trailingAnchor, constant: 30),
-            titleLabel.bottomAnchor.constraint(equalTo: leftImageView.bottomAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
         ])
+        
+        leftImageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        leftImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
 }
