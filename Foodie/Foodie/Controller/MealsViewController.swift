@@ -43,7 +43,7 @@ class MealsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = category.title
+        navigationItem.title = "\(category.title) Meals"
         setUpUI()
     }
     

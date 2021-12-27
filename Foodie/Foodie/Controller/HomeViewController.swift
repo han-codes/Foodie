@@ -72,6 +72,7 @@ class HomeViewController: UIViewController {
     
     private func setUpNavigationBar() {
         navigationItem.title = "Discover"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setUpSubviews() {

@@ -55,10 +55,9 @@ class MealDetailsViewController: UIViewController {
     let ingredientsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "apple, orange, spinach"
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 10
+        label.numberOfLines = 0
         return label
     }()
     
@@ -73,10 +72,9 @@ class MealDetailsViewController: UIViewController {
     let instructionsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "do this, then do that"
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 10
+        label.numberOfLines = 0
         return label
     }()
     
@@ -110,7 +108,6 @@ class MealDetailsViewController: UIViewController {
     private func setUpUI() {
         instructionsLabel.text = mealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
         ingredientsLabel.text = mealDetails.ingredients.joined(separator: ", ")
-        
         
         ingredientsStackView.addArrangedSubview(ingredientsTitleLabel)
         ingredientsStackView.addArrangedSubview(ingredientsLabel)
