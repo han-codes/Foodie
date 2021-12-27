@@ -17,11 +17,22 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    let categoryHeaderLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Meal Categories"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        return label
+    }()
+    
     lazy var mealCategoryTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.layer.cornerRadius = 20
+        tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        tableView.backgroundColor = .lightGray
         tableView.register(ImageWithLabelTableViewCell.self, forCellReuseIdentifier: ImageWithLabelTableViewCell.cellID)
         return tableView
     }()
@@ -32,11 +43,16 @@ class HomeViewController: UIViewController {
     
     // MARK: - Lifecycle Methods
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        setUpNavigationBar()
         setUpSubviews()
         
         WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
@@ -67,27 +83,32 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
     // MARK: - UI Setup
-    
-    private func setUpNavigationBar() {
-        navigationItem.title = "Discover"
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
     
     private func setUpSubviews() {
         
         view.addSubview(mealSuggestionView)
+        view.addSubview(categoryHeaderLabel)
         view.addSubview(mealCategoryTableView)
         
         NSLayoutConstraint.activate([
             mealSuggestionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             mealSuggestionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mealSuggestionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            mealSuggestionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
             
-            mealSuggestionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/5),
-
-            mealCategoryTableView.topAnchor.constraint(equalTo: mealSuggestionView.bottomAnchor, constant: 75),
+            categoryHeaderLabel.topAnchor.constraint(equalTo: mealSuggestionView.bottomAnchor, constant: 50),
+            categoryHeaderLabel.leadingAnchor.constraint(equalTo: mealSuggestionView.leadingAnchor, constant: 5),
+            categoryHeaderLabel.trailingAnchor.constraint(equalTo: mealSuggestionView.trailingAnchor),
+            
+            mealCategoryTableView.topAnchor.constraint(equalTo: categoryHeaderLabel.bottomAnchor),
             mealCategoryTableView.leadingAnchor.constraint(equalTo: mealSuggestionView.leadingAnchor),
             mealCategoryTableView.trailingAnchor.constraint(equalTo: mealSuggestionView.trailingAnchor),
             mealCategoryTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -130,7 +151,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
                 }
             }
-            
         }
     }
 }

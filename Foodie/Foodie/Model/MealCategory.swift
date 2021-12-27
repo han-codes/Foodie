@@ -9,6 +9,8 @@ import Foundation
 
 struct MealCategoryResponse: Decodable {
     let categories: [MealCategory]
+    
+    // TODO: Sort categories alphabetically
 }
 
 struct MealCategory: Decodable {

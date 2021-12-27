@@ -127,9 +127,6 @@ class MealDetailsViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            ingredientsStackView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1/4),
-            instructionsStackView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1/2),
-            
             ingredientsTitleLabel.heightAnchor.constraint(equalToConstant: 30),
             instructionsTitleLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
