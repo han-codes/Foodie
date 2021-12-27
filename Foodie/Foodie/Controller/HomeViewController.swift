@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
 
     // MARK: - UI Properties
     
@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     
     var categories: [MealCategory]?
+    let dispatchGroup = DispatchGroup()        
     
     // MARK: - Lifecycle Methods
     
@@ -54,34 +55,7 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = .white
         setUpSubviews()
-        
-        WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
-            guard let mealDetails = randomMealDetails, error == nil else {
-                print("Fetch random meal details failed with error: \(String(describing: error?.localizedDescription))")
-                // TODO: Present error alert
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
-                    self?.mealSuggestionView.imageView.image = UIImage(data: data)
-                }
-                self?.mealSuggestionView.titleLabel.text = mealDetails.name
-            }
-        }
-        
-        WebService.fetchMealCategories { [weak self] categories, error in
-            guard let categories = categories, error == nil else {
-                print("Fetch meal categories failed with error: \(String(describing: error?.localizedDescription))")
-                // TODO: Present error alert
-                return
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.categories = categories
-                self?.mealCategoryTableView.reloadData()
-            }
-        }
+        setUpRandomMealAndCategories()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,6 +87,58 @@ class HomeViewController: UIViewController {
             mealCategoryTableView.trailingAnchor.constraint(equalTo: mealSuggestionView.trailingAnchor),
             mealCategoryTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    private func setUpRandomMealAndCategories() {
+        addSpinner()
+        fetchRandomMealDetails()
+        fetchMealCategories()
+        dispatchGroup.notify(queue: .main) {
+            self.removeSpinner()
+        }
+    }
+    
+    private func fetchRandomMealDetails() {
+        dispatchGroup.enter()
+        
+        WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
+            guard let mealDetails = randomMealDetails, error == nil else {
+                print("Fetch random meal details failed with error: \(String(describing: error?.localizedDescription))")
+                // TODO: Present error alert
+                self?.dispatchGroup.leave()
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
+                    self?.mealSuggestionView.imageView.image = UIImage(data: data)
+                }
+                self?.mealSuggestionView.titleLabel.text = mealDetails.name
+            }
+            
+            self?.dispatchGroup.leave()
+        }
+    }
+    
+    private func fetchMealCategories() {
+        dispatchGroup.enter()
+        print("Dispatch group 2 enter")
+        
+        WebService.fetchMealCategories { [weak self] categories, error in
+            guard let categories = categories, error == nil else {
+                print("Fetch meal categories failed with error: \(String(describing: error?.localizedDescription))")
+                // TODO: Present error alert
+                self?.dispatchGroup.leave()
+                return
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.categories = categories
+                self?.mealCategoryTableView.reloadData()
+            }
+            
+            self?.dispatchGroup.leave()
+        }
     }
 }
 
