@@ -106,8 +106,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         guard let category = categories?[indexPath.row], let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
             return UITableViewCell()
         }
-        
-        
+                
         if let data = try? Data(contentsOf: category.thumbnailURL) {
             cell.leftImageView.image = UIImage(data: data)
         }

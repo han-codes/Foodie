@@ -103,7 +103,7 @@ class WebService {
         }.resume()
     }
     
-    static func fetchMealDetails(usingId id: String) {
+    static func fetchMealDetails(usingId id: String, completion: @escaping (MealDetails?, Error?) -> Void) {
         guard let mealDetailsURL = Constants.API.URLs.lookupMealURL(usingID: id) else {
             print("Unable to unwrap a valid URL for fetching meal details")
             return
@@ -118,6 +118,21 @@ class WebService {
             }
             
             try? prettyPrintJSON(data: data)
+            
+            do {
+                let mealDetailResponse = try JSONDecoder().decode(MealDetailResponse.self, from: data)
+                
+                if let mealDetails = mealDetailResponse.mealDetails.first {
+                    completion(mealDetails, nil)
+                }
+                else {
+                    completion(nil, CommonError.missingData)
+                }
+            }
+            catch {
+                print("Failed to decode meal detail response with error: \(error.localizedDescription)")
+                completion(nil, error)
+            }
         }.resume()
     }
     

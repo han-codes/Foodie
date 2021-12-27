@@ -57,6 +57,8 @@ class MealDetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "apple, orange, spinach"
         label.textAlignment = .left
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 10
         return label
     }()
     
@@ -73,8 +75,26 @@ class MealDetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "do this, then do that"
         label.textAlignment = .left
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 10
         return label
     }()
+    
+    // MARK: - Properties
+    
+    let mealDetails: MealDetails
+    
+    // MARK: - Initializer
+    
+    init(mealDetails: MealDetails) {
+        self.mealDetails = mealDetails
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     
@@ -88,7 +108,10 @@ class MealDetailsViewController: UIViewController {
     // MARK: - UI Setup
     
     private func setUpUI() {
-                
+        instructionsLabel.text = mealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
+        ingredientsLabel.text = mealDetails.ingredients.joined(separator: ", ")
+        
+        
         ingredientsStackView.addArrangedSubview(ingredientsTitleLabel)
         ingredientsStackView.addArrangedSubview(ingredientsLabel)
         

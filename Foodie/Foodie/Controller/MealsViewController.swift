@@ -86,6 +86,17 @@ extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Network request to fetch meal details
-        navigationController?.pushViewController(MealDetailsViewController(), animated: true)
+        
+        WebService.fetchMealDetails(usingId: meals[indexPath.row].id) { [weak self] mealDetails, error in
+            guard let mealDetails = mealDetails, error == nil else {
+                print("Fetching meal details failed with error: \(String(describing: error?.localizedDescription))")
+                // TODO: Present error alert
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(MealDetailsViewController(mealDetails: mealDetails), animated: true)
+            }
+        }
     }
 }
