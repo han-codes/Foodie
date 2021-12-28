@@ -11,8 +11,8 @@ class HomeViewController: BaseViewController {
 
     // MARK: - UI Properties
     
-    let mealSuggestionView: MealSuggestionsView = {
-        let view = MealSuggestionsView()
+    lazy var mealSuggestionView: MealSuggestionsView = {
+        let view = MealSuggestionsView(moreInfoDelegate: self, refreshDelegate: self)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,7 +40,8 @@ class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     var categories: [MealCategory]?
-    let dispatchGroup = DispatchGroup()        
+    let dispatchGroup = DispatchGroup()
+    var mealSuggestion: MealDetails?
     
     // MARK: - Lifecycle Methods
     
@@ -91,14 +92,14 @@ class HomeViewController: BaseViewController {
     
     private func setUpRandomMealAndCategories() {
         addSpinner()
-        fetchRandomMealDetails()
-        fetchMealCategories()
+        setUpRandomMealDetails()
+        setUpMealCategories()
         dispatchGroup.notify(queue: .main) {
             self.removeSpinner()
         }
     }
     
-    private func fetchRandomMealDetails() {
+    private func setUpRandomMealDetails() {
         dispatchGroup.enter()
         
         WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
@@ -108,6 +109,8 @@ class HomeViewController: BaseViewController {
                 self?.dispatchGroup.leave()
                 return
             }
+            
+            self?.mealSuggestion = mealDetails
             
             DispatchQueue.main.async {
                 if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
@@ -120,7 +123,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    private func fetchMealCategories() {
+    private func setUpMealCategories() {
         dispatchGroup.enter()
         print("Dispatch group 2 enter")
         
@@ -145,7 +148,6 @@ class HomeViewController: BaseViewController {
 // MARK: - UITableViewDelegate & UITableViewDataSource
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories?.count ?? 0
     }
@@ -178,5 +180,23 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         }
+    }
+}
+
+// MARK: - MoreInfoButtonPressable
+
+extension HomeViewController: MoreInfoButtonPressable {
+    func getMoreInfo() {
+        if let mealSuggestion = mealSuggestion {
+            self.navigationController?.pushViewController(MealDetailsViewController(mealDetails: mealSuggestion), animated: true)
+        }
+    }
+}
+
+// MARK: - RefreshButtonPressable
+
+extension HomeViewController: RefreshButtonPressable {
+    func refresh() {
+        setUpRandomMealDetails()
     }
 }

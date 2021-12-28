@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol MoreInfoButtonPressable: AnyObject {
+    func getMoreInfo()
+}
+
+protocol RefreshButtonPressable: AnyObject {
+    func refresh()
+}
+
 class MealSuggestionsView: UIView {
     
     // MARK: - UI Properties
@@ -30,8 +38,6 @@ class MealSuggestionsView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         return label
     }()
@@ -41,7 +47,7 @@ class MealSuggestionsView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("More Info", for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(seeDetailsButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(moreInfoButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -68,11 +74,19 @@ class MealSuggestionsView: UIView {
         return imageView
     }()
     
+    // MARK: - Properties
+    
+    weak var moreInfoDelegate: MoreInfoButtonPressable?
+    weak var refreshDelegate: RefreshButtonPressable?
+    
     // MARK: - Initializer
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(moreInfoDelegate: MoreInfoButtonPressable?, refreshDelegate: RefreshButtonPressable?, frame: CGRect = .zero) {
+        self.moreInfoDelegate = moreInfoDelegate
+        self.refreshDelegate = refreshDelegate
         
+        super.init(frame: frame)
+                
         setUpSubviews()
     }
     
@@ -103,6 +117,7 @@ class MealSuggestionsView: UIView {
             
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: refreshButton.leadingAnchor, constant: 10),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
@@ -125,11 +140,13 @@ class MealSuggestionsView: UIView {
     
     // MARK: - Actions
     
-    @objc func seeDetailsButtonPressed() {
-        print("See details button pressed")
+    @objc func moreInfoButtonPressed() {
+        print("More Info button pressed")
+        moreInfoDelegate?.getMoreInfo()
     }
     
     @objc func refreshButtonPressed() {
         print("Refresh button pressed")
+        refreshDelegate?.refresh()
     }
 }

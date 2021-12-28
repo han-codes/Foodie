@@ -171,11 +171,11 @@
 		F3A30D6C2773AED200161F18 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE45A2A4277A80660097F093 /* BaseViewController.swift */,
+				AE45A2A2277A7F870097F093 /* SpinnerViewController.swift */,
 				F3A30D3E2773AADC00161F18 /* HomeViewController.swift */,
 				AE2A4CE827768A6C0040F0EF /* MealsViewController.swift */,
 				F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */,
-				AE45A2A2277A7F870097F093 /* SpinnerViewController.swift */,
-				AE45A2A4277A80660097F093 /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
