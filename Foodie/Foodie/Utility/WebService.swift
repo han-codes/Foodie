@@ -14,7 +14,7 @@ class WebService {
         case POST
     }
     
-    static func fetchRandomMealDetails(completion: @escaping (MealDetails?, Error?) -> Void) {
+    static func fetchRandomMealDetails(completion: @escaping (Result<MealDetails, Error>) -> Void) {
         guard let randomMealURL = URL(string: Constants.API.URLString.randomMealURL) else {
             print("Unable to unwrap a valid URL for fetching a random meal")
             return
@@ -25,7 +25,7 @@ class WebService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                completion(nil, error)
+                completion(.failure(CommonError.missingData))
                 return
             }
             
@@ -35,22 +35,23 @@ class WebService {
                 let mealResponse = try JSONDecoder().decode(MealDetailResponse.self, from: data)
                 
                 if let mealDetails = mealResponse.mealDetails.first {
-                    completion(mealDetails, nil)
+                    completion(.success(mealDetails))
                 }
                 else {
-                    completion(nil, CommonError.missingData)
+                    completion(.failure(CommonError.missingData))
                 }
             }
             catch {
                 print("Failed to decode meal response with error: \(error.localizedDescription)")
-                completion(nil, error)
+                completion(.failure(error))
             }
         }.resume()
     }
     
-    static func fetchMealCategories(completion: @escaping ([MealCategory]?, Error?) -> Void) {
+    static func fetchMealCategories(completion: @escaping (Result<[MealCategory], Error>) -> Void) {
         guard let categoriesURL = URL(string: Constants.API.URLString.mealCategoriesURL) else {
             print("Unable to unwrap a valid URL for fetching meal categories")
+            completion(.failure(CommonError.invalidURL))
             return
         }
         
@@ -59,7 +60,7 @@ class WebService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                completion(nil, error)
+                completion(.failure(CommonError.missingData))
                 return
             }
             
@@ -67,18 +68,19 @@ class WebService {
             
             do {
                 let mealCategoryResponse = try JSONDecoder().decode(MealCategoryResponse.self, from: data)
-                completion(mealCategoryResponse.categories, nil)
+                completion(.success(mealCategoryResponse.categories))
             }
             catch {
                 print("Failed to decode meal category response with error: \(error.localizedDescription)")
-                completion(nil, error)
+                completion(.failure(error))
             }
         }.resume()
     }
     
-    static func fetchMealsByCategory(_ category: String, completion: @escaping ([Meal]?, Error?) -> Void) {
+    static func fetchMealsByCategory(_ category: String, completion: @escaping (Result<[Meal], Error>) -> Void) {
         guard let mealsByCategoryURL = Constants.API.URLs.lookupMealsByCategoryURL(category) else {
             print("Unable to unwrap a valid URL for fetching meals by a category")
+            completion(.failure(CommonError.invalidURL))
             return
         }
         
@@ -87,6 +89,7 @@ class WebService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
+                completion(.failure(CommonError.missingData))
                 return
             }
             
@@ -94,18 +97,19 @@ class WebService {
             
             do {
                 let mealCategoryResponse = try JSONDecoder().decode(MealResponse.self, from: data)
-                completion(mealCategoryResponse.meals, nil)
+                completion(.success(mealCategoryResponse.meals))
             }
             catch {
                 print("Failed to decode meal response with error: \(error.localizedDescription)")
-                completion(nil, error)
+                completion(.failure(error))
             }
         }.resume()
     }
     
-    static func fetchMealDetails(usingId id: String, completion: @escaping (MealDetails?, Error?) -> Void) {
+    static func fetchMealDetails(usingId id: String, completion: @escaping (Result<MealDetails, Error>) -> Void) {
         guard let mealDetailsURL = Constants.API.URLs.lookupMealURL(usingID: id) else {
             print("Unable to unwrap a valid URL for fetching meal details")
+            completion(.failure(CommonError.invalidURL))
             return
         }
         
@@ -114,6 +118,7 @@ class WebService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
+                completion(.failure(CommonError.missingData))
                 return
             }
             
@@ -123,15 +128,15 @@ class WebService {
                 let mealDetailResponse = try JSONDecoder().decode(MealDetailResponse.self, from: data)
                 
                 if let mealDetails = mealDetailResponse.mealDetails.first {
-                    completion(mealDetails, nil)
+                    completion(.success(mealDetails))
                 }
                 else {
-                    completion(nil, CommonError.missingData)
+                    completion(.failure(CommonError.missingData))
                 }
             }
             catch {
                 print("Failed to decode meal detail response with error: \(error.localizedDescription)")
-                completion(nil, error)
+                completion(.failure(error))
             }
         }.resume()
     }

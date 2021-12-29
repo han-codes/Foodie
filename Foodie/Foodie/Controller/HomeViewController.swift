@@ -103,21 +103,24 @@ class HomeViewController: BaseViewController {
     private func setUpRandomMealDetails() {
         dispatchGroup.enter()
         
-        WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
+        WebService.fetchRandomMealDetails { [weak self] result in
             defer { self?.dispatchGroup.leave() }
-            guard let mealDetails = randomMealDetails, error == nil else {
-                print("Fetching meal suggestion details failed with error: \(String(describing: error?.localizedDescription))")
-                self?.presentRequestFailedAlert(forType: .fetchMealSuggestion)
-                return
-            }
             
-            self?.mealSuggestion = mealDetails
-            
-            DispatchQueue.main.async {
-                if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
-                    self?.mealSuggestionView.imageView.image = UIImage(data: data)
+            switch result {
+            case .success(let mealDetails):
+                self?.mealSuggestion = mealDetails
+                
+                DispatchQueue.main.async {
+                    if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
+                        self?.mealSuggestionView.imageView.image = UIImage(data: data)
+                    }
+                    self?.mealSuggestionView.titleLabel.text = mealDetails.name
                 }
-                self?.mealSuggestionView.titleLabel.text = mealDetails.name
+            case .failure(let error):
+                print("Fetching meal suggestion details failed with error: \(String(describing: error.localizedDescription))")
+                DispatchQueue.main.async {
+                    self?.presentRequestFailedAlert(forType: .fetchMealSuggestion)
+                }
             }
         }
     }
@@ -125,18 +128,20 @@ class HomeViewController: BaseViewController {
     private func setUpMealCategories() {
         dispatchGroup.enter()
         
-        WebService.fetchMealCategories { [weak self] categories, error in
+        WebService.fetchMealCategories { [weak self] result in
             defer { self?.dispatchGroup.leave() }
             
-            guard let categories = categories, error == nil else {
-                print("Fetching meal categories failed with error: \(String(describing: error?.localizedDescription))")
-                self?.presentRequestFailedAlert(forType: .fetchMealCategories)
-                return
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.categories = categories
-                self?.mealCategoryTableView.reloadData()
+            switch result {
+            case .success(let mealCategories):
+                DispatchQueue.main.async { [weak self] in
+                    self?.categories = mealCategories
+                    self?.mealCategoryTableView.reloadData()
+                }
+            case .failure(let error):
+                print("Fetching meal categories failed with error: \(String(describing: error.localizedDescription))")
+                DispatchQueue.main.async {
+                    self?.presentRequestFailedAlert(forType: .fetchMealCategories)
+                }
             }
         }
     }
@@ -171,17 +176,22 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         addSpinner()
         
-        WebService.fetchMealsByCategory(selectedCategory.title) { [weak self] meals, error in
-            defer { self?.removeSpinner() }
-            
-            guard let meals = meals, error == nil else {
-                print("Fetching meals failed with error: \(String(describing: error?.localizedDescription))")
-                self?.presentRequestFailedAlert(forType: .fetchMeals)
-                return
+        WebService.fetchMealsByCategory(selectedCategory.title) { [weak self] result in
+            defer {
+                DispatchQueue.main.async {
+                    self?.removeSpinner()
+                }
             }
-            
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
+            switch result {
+            case .success(let meals):
+                DispatchQueue.main.async {
+                    self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
+                }
+            case .failure(let error):
+                print("Fetching meals failed with error: \(String(describing: error.localizedDescription))")
+                DispatchQueue.main.async {
+                    self?.presentRequestFailedAlert(forType: .fetchMeals)
+                }
             }
         }
     }

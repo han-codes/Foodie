@@ -64,6 +64,8 @@ class MealsViewController: BaseViewController {
     }
 }
 
+// MARK: - UITableViewDelegate & UITableViewDataSource
+
 extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,17 +91,25 @@ extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         addSpinner()
         
-        WebService.fetchMealDetails(usingId: meals[indexPath.row].id) { [weak self] mealDetails, error in
-            defer { self?.removeSpinner() }
-            
-            guard let mealDetails = mealDetails, error == nil else {
-                print("Fetching meal details failed with error: \(String(describing: error?.localizedDescription))")
-                self?.presentRequestFailedAlert(forType: .fetchMealDetails)
-                return
+        let selectedMealId = meals[indexPath.row].id
+        
+        WebService.fetchMealDetails(usingId: selectedMealId) { [weak self] result in
+            defer {
+                DispatchQueue.main.async {
+                    self?.removeSpinner()
+                }
             }
             
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(MealDetailsViewController(mealDetails: mealDetails), animated: true)
+            switch result {
+            case .success(let mealDetails):
+                DispatchQueue.main.async {
+                    self?.navigationController?.pushViewController(MealDetailsViewController(mealDetails: mealDetails), animated: true)
+                }
+            case .failure(let error):
+                print("Fetching meal details failed with error: \(String(describing: error.localizedDescription))")
+                DispatchQueue.main.async {
+                    self?.presentRequestFailedAlert(forType: .fetchMealDetails)
+                }
             }
         }
     }
