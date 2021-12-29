@@ -8,9 +8,7 @@
 import Foundation
 
 struct Constants {
-    
     struct API {
-        
         static let baseURL = "https://www.themealdb.com/api/json/v1/1"
         
         struct Path {

@@ -26,6 +26,8 @@ class ImageWithLabelTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textAlignment = .left
         label.textColor = UIColor.Theme.darkBlue
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         return label
     }()
     
@@ -40,7 +42,7 @@ class ImageWithLabelTableViewCell: UITableViewCell {
         
         backgroundColor = .clear
         selectionStyle = .none
-        setUpSubviews()
+        addSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +51,7 @@ class ImageWithLabelTableViewCell: UITableViewCell {
     
     // MARK: - UI Setup
     
-    private func setUpSubviews() {
+    private func addSubviews() {
         contentView.addSubview(leftImageView)
         contentView.addSubview(titleLabel)
         

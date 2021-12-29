@@ -11,6 +11,18 @@ class MealDetailsViewController: UIViewController {
     
     // MARK: - UI Properties
     
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -25,66 +37,18 @@ class MealDetailsViewController: UIViewController {
         return view
     }()
     
-    let ingredientsStackView: UIStackView = {
-        let stackView = UIStackView()
+    let ingredientsStackView: TitleAndDescriptionStackView = {
+        let stackView = TitleAndDescriptionStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.backgroundColor = UIColor.Theme.mediumBlue
-        stackView.layer.cornerRadius = 10
+        stackView.title = "Ingredients"
         return stackView
     }()
     
-    let instructionsStackView: UIStackView = {
-        let stackView = UIStackView()
+    let instructionsStackView: TitleAndDescriptionStackView = {
+        let stackView = TitleAndDescriptionStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.backgroundColor = UIColor.Theme.mediumBlue
-        stackView.layer.cornerRadius = 10
+        stackView.title = "Instructions"
         return stackView
-    }()
-    
-    let ingredientsTitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Ingredients"
-        label.textAlignment = .center
-        label.textColor = UIColor.Theme.darkBlue
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        return label
-    }()
-    
-    let ingredientsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.textColor = UIColor.Theme.darkBlue
-        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        return label
-    }()
-    
-    let instructionsTitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Instructions"
-        label.textAlignment = .center
-        label.textColor = UIColor.Theme.darkBlue
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        return label
-    }()
-    
-    let instructionsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.textColor = UIColor.Theme.darkBlue
-        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        return label
     }()
     
     // MARK: - Properties
@@ -116,29 +80,40 @@ class MealDetailsViewController: UIViewController {
     // MARK: - UI Setup
     
     private func setUpUI() {
-        instructionsLabel.text = mealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
-        ingredientsLabel.text = mealDetails.ingredients.joined(separator: ", ")
+        instructionsStackView.descriptionText = mealDetails.instructions.replacingOccurrences(of: "\n", with: "\n\n")
+        ingredientsStackView.descriptionText = mealDetails.ingredients.joined(separator: ", ")
         
-        ingredientsStackView.addArrangedSubview(ingredientsTitleLabel)
-        ingredientsStackView.addArrangedSubview(ingredientsLabel)
-        
-        instructionsStackView.addArrangedSubview(instructionsTitleLabel)
-        instructionsStackView.addArrangedSubview(instructionsLabel)
-        
+        addSubviews()
+        addConstraints()
+    }
+    
+    private func addSubviews() {
         stackView.addArrangedSubview(ingredientsStackView)
         stackView.addArrangedSubview(instructionsStackView)
         stackView.addArrangedSubview(emptyView)
         
-        view.addSubview(stackView)
-        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
+    }
+    
+    private func addConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            ingredientsTitleLabel.heightAnchor.constraint(equalToConstant: 30),
-            instructionsTitleLabel.heightAnchor.constraint(equalToConstant: 30)
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }
