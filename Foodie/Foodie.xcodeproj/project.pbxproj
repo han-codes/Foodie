@@ -22,9 +22,6 @@
 		F3A30D3F2773AADC00161F18 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D3E2773AADC00161F18 /* HomeViewController.swift */; };
 		F3A30D442773AADE00161F18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3A30D432773AADE00161F18 /* Assets.xcassets */; };
 		F3A30D472773AADE00161F18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3A30D452773AADE00161F18 /* LaunchScreen.storyboard */; };
-		F3A30D522773AADE00161F18 /* FoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D512773AADE00161F18 /* FoodieTests.swift */; };
-		F3A30D5C2773AADE00161F18 /* FoodieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */; };
-		F3A30D5E2773AADE00161F18 /* FoodieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */; };
 		F3A30D702773B2D800161F18 /* MealSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */; };
 		F3AF42C7277CE55D00F17E3D /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF42C6277CE55D00F17E3D /* RequestType.swift */; };
 		F3B1552C2779231B00AB9523 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */; };
@@ -71,10 +68,7 @@
 		F3A30D462773AADE00161F18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3A30D482773AADE00161F18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A30D4D2773AADE00161F18 /* FoodieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3A30D512773AADE00161F18 /* FoodieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieTests.swift; sourceTree = "<group>"; };
 		F3A30D572773AADE00161F18 /* FoodieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITests.swift; sourceTree = "<group>"; };
-		F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodieUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F3A30D6F2773B2D800161F18 /* MealSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSuggestionsView.swift; sourceTree = "<group>"; };
 		F3AF42C6277CE55D00F17E3D /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		F3B1552B2779231A00AB9523 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
@@ -131,8 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				F3A30D392773AADC00161F18 /* Foodie */,
-				F3A30D502773AADE00161F18 /* FoodieTests */,
-				F3A30D5A2773AADE00161F18 /* FoodieUITests */,
 				F3A30D382773AADC00161F18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,23 +150,6 @@
 				F3A30D6D2773AEDC00161F18 /* Supporting Files */,
 			);
 			path = Foodie;
-			sourceTree = "<group>";
-		};
-		F3A30D502773AADE00161F18 /* FoodieTests */ = {
-			isa = PBXGroup;
-			children = (
-				F3A30D512773AADE00161F18 /* FoodieTests.swift */,
-			);
-			path = FoodieTests;
-			sourceTree = "<group>";
-		};
-		F3A30D5A2773AADE00161F18 /* FoodieUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F3A30D5B2773AADE00161F18 /* FoodieUITests.swift */,
-				F3A30D5D2773AADE00161F18 /* FoodieUITestsLaunchTests.swift */,
-			);
-			path = FoodieUITests;
 			sourceTree = "<group>";
 		};
 		F3A30D6A2773AEC700161F18 /* Model */ = {
@@ -408,7 +383,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3A30D522773AADE00161F18 /* FoodieTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,8 +390,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3A30D5E2773AADE00161F18 /* FoodieUITestsLaunchTests.swift in Sources */,
-				F3A30D5C2773AADE00161F18 /* FoodieUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
