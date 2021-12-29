@@ -7,9 +7,11 @@ An iOS app to view more details of your favorite meals, as well as find new meal
 * Increase your palette through the ease of finding new recipes.
 
 ## Screenshots 
-<img src="Screenshots/foodie-home.png" />
-<img src="Screenshots/foodie-meals" />    
-<img src="Screenshots/foodie-mealdetails" />
+<p float="left">
+    <img src="Screenshots/foodie-home.png" width="200" />
+    <img src="Screenshots/foodie-meals.png" width="200"/>    
+    <img src="Screenshots/foodie-mealdetails.png" width="200" />
+</p>
 
 ## Technologies Used  
 * Swift
