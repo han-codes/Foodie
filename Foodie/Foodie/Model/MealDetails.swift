@@ -23,7 +23,6 @@ struct MealDetailResponse: Decodable {
 struct MealDetails: Decodable {
     let id: String
     let name: String
-    let category: String
     let instructions: String
     let ingredients: [String]
     let thumbnailURL: URL
@@ -52,7 +51,6 @@ struct MealDetails: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        category = try container.decode(String.self, forKey: .category)
         instructions = try container.decode(String.self, forKey: .instructions)
         
         let thumbnailStr = try container.decode(String.self, forKey: .thumbnail)

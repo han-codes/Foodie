@@ -14,7 +14,6 @@ class ImageWithLabelTableViewCell: UITableViewCell {
     let leftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = .checkmark
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -22,7 +21,6 @@ class ImageWithLabelTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Beef"
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textAlignment = .left
         label.textColor = UIColor.Theme.darkBlue
@@ -34,6 +32,20 @@ class ImageWithLabelTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     static let cellID = String(describing: ImageWithLabelTableViewCell.self)
+    
+    var imageURL: URL? {
+        didSet {
+            if let url = imageURL {
+                leftImageView.loadImage(from: url)
+            }
+        }
+    }
+    
+    var title: String?{
+        didSet {
+            titleLabel.text = title
+        }
+    }
     
     // MARK: - Initializer
     

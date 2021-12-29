@@ -11,12 +11,6 @@ class HomeViewController: BaseViewController {
 
     // MARK: - UI Properties
     
-    lazy var mealSuggestionView: MealSuggestionsView = {
-        let view = MealSuggestionsView(moreInfoDelegate: self, refreshDelegate: self)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     let categoryHeaderLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +18,12 @@ class HomeViewController: BaseViewController {
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         label.textColor = UIColor.Theme.darkBlue
         return label
+    }()
+    
+    lazy var mealSuggestionView: MealSuggestionsView = {
+        let view = MealSuggestionsView(moreInfoDelegate: self, refreshDelegate: self)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     lazy var mealCategoryTableView: UITableView = {
@@ -39,9 +39,9 @@ class HomeViewController: BaseViewController {
     }()
     
     // MARK: - Properties
-    
-    var categories: [MealCategory]?
+        
     let dispatchGroup = DispatchGroup()
+    var categories: [MealCategory]?
     var mealSuggestion: MealDetails?
     
     // MARK: - Lifecycle Methods
@@ -111,10 +111,8 @@ class HomeViewController: BaseViewController {
                 self?.mealSuggestion = mealDetails
                 
                 DispatchQueue.main.async {
-                    if let data = try? Data(contentsOf: mealDetails.thumbnailURL) {
-                        self?.mealSuggestionView.imageView.image = UIImage(data: data)
-                    }
-                    self?.mealSuggestionView.titleLabel.text = mealDetails.name
+                    self?.mealSuggestionView.imageURL = mealDetails.thumbnailURL
+                    self?.mealSuggestionView.title = mealDetails.name
                 }
             case .failure(let error):
                 print("Fetching meal suggestion details failed with error: \(String(describing: error.localizedDescription))")
@@ -158,12 +156,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         guard let category = categories?[indexPath.row], let cell = tableView.dequeueReusableCell(withIdentifier: ImageWithLabelTableViewCell.cellID, for: indexPath) as? ImageWithLabelTableViewCell else {
             return UITableViewCell()
         }
-                
-        if let data = try? Data(contentsOf: category.thumbnailURL) {
-            cell.leftImageView.image = UIImage(data: data)
-        }
         
-        cell.titleLabel.text = category.title
+        cell.imageURL = category.thumbnailURL
+        cell.title = category.title
         
         return cell
     }

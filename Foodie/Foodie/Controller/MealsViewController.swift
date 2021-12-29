@@ -75,11 +75,8 @@ extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let meal = meals[indexPath.row]
         
-        if let data = try? Data(contentsOf: meal.thumbnailURL) {
-            cell.leftImageView.image = UIImage(data: data)
-        }
-        
-        cell.titleLabel.text = meal.name
+        cell.imageURL = meal.thumbnailURL
+        cell.title = meal.name
         
         return cell
     }

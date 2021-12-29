@@ -61,12 +61,6 @@ class MealSuggestionsView: UIView {
         button.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
         return button
     }()
-        
-    var image: UIImage? {
-        didSet {
-            imageView.image = image
-        }
-    }
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -80,6 +74,20 @@ class MealSuggestionsView: UIView {
     
     weak var moreInfoDelegate: MoreInfoButtonPressable?
     weak var refreshDelegate: RefreshButtonPressable?
+    
+    var imageURL: URL? {
+        didSet {
+            if let url = imageURL {
+                imageView.loadImage(from: url)
+            }
+        }
+    }
+    
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
     
     // MARK: - Initializer
     
@@ -99,13 +107,20 @@ class MealSuggestionsView: UIView {
     // MARK: - UI Setup
     
     private func setUpSubviews() {
+        addSubviews()
+        addConstraints()
+    }
+    
+    private func addSubviews() {
         addSubview(headerLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(seeDetailsButton)
         contentView.addSubview(refreshButton)
         contentView.addSubview(imageView)
         addSubview(contentView)
-        
+    }
+    
+    private func addConstraints() {
         NSLayoutConstraint.activate([
             headerLabel.topAnchor.constraint(equalTo: topAnchor),
             headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
