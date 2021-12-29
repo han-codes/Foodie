@@ -23,4 +23,10 @@ class BaseViewController: UIViewController {
         spinnerViewController.view.removeFromSuperview()
         spinnerViewController.removeFromParent()
     }
+    
+    func presentRequestFailedAlert(forType requestType: RequestType) {
+        let alertController = UIAlertController(title: "Error", message: "Sorry, we're unable to \(requestType.rawValue) at this time. Please try again shortly.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alertController, animated: true, completion: nil)        
+    }
 }

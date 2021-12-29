@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MealsViewController: UIViewController {
+class MealsViewController: BaseViewController {
     
     // MARK: - UI Properties
     
@@ -87,12 +87,14 @@ extension MealsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Network request to fetch meal details
+        addSpinner()
         
         WebService.fetchMealDetails(usingId: meals[indexPath.row].id) { [weak self] mealDetails, error in
+            defer { self?.removeSpinner() }
+            
             guard let mealDetails = mealDetails, error == nil else {
                 print("Fetching meal details failed with error: \(String(describing: error?.localizedDescription))")
-                // TODO: Present error alert
+                self?.presentRequestFailedAlert(forType: .fetchMealDetails)
                 return
             }
             

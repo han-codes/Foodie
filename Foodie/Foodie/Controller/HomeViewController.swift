@@ -104,10 +104,10 @@ class HomeViewController: BaseViewController {
         dispatchGroup.enter()
         
         WebService.fetchRandomMealDetails { [weak self] randomMealDetails, error in
+            defer { self?.dispatchGroup.leave() }
             guard let mealDetails = randomMealDetails, error == nil else {
-                print("Fetch random meal details failed with error: \(String(describing: error?.localizedDescription))")
-                // TODO: Present error alert
-                self?.dispatchGroup.leave()
+                print("Fetching meal suggestion details failed with error: \(String(describing: error?.localizedDescription))")
+                self?.presentRequestFailedAlert(forType: .fetchMealSuggestion)
                 return
             }
             
@@ -119,8 +119,6 @@ class HomeViewController: BaseViewController {
                 }
                 self?.mealSuggestionView.titleLabel.text = mealDetails.name
             }
-            
-            self?.dispatchGroup.leave()
         }
     }
     
@@ -128,10 +126,11 @@ class HomeViewController: BaseViewController {
         dispatchGroup.enter()
         
         WebService.fetchMealCategories { [weak self] categories, error in
+            defer { self?.dispatchGroup.leave() }
+            
             guard let categories = categories, error == nil else {
-                print("Fetch meal categories failed with error: \(String(describing: error?.localizedDescription))")
-                // TODO: Present error alert
-                self?.dispatchGroup.leave()
+                print("Fetching meal categories failed with error: \(String(describing: error?.localizedDescription))")
+                self?.presentRequestFailedAlert(forType: .fetchMealCategories)
                 return
             }
             
@@ -139,8 +138,6 @@ class HomeViewController: BaseViewController {
                 self?.categories = categories
                 self?.mealCategoryTableView.reloadData()
             }
-            
-            self?.dispatchGroup.leave()
         }
     }
 }
@@ -167,17 +164,24 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedCategory = categories?[indexPath.row] {
-            WebService.fetchMealsByCategory(selectedCategory.title) { [weak self] meals, error in
-                guard let meals = meals, error == nil else {
-                    print("Fetching meals failed with error: \(String(describing: error?.localizedDescription))")
-                    // TODO: Present error alert
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
-                }
+        guard let selectedCategory = categories?[indexPath.row] else {
+            assertionFailure("Unable to access a category for selected IndexPath")
+            return
+        }
+        
+        addSpinner()
+        
+        WebService.fetchMealsByCategory(selectedCategory.title) { [weak self] meals, error in
+            defer { self?.removeSpinner() }
+            
+            guard let meals = meals, error == nil else {
+                print("Fetching meals failed with error: \(String(describing: error?.localizedDescription))")
+                self?.presentRequestFailedAlert(forType: .fetchMeals)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(MealsViewController(category: selectedCategory, meals: meals), animated: true)
             }
         }
     }
