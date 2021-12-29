@@ -17,6 +17,7 @@ class MealsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ImageWithLabelTableViewCell.self, forCellReuseIdentifier: ImageWithLabelTableViewCell.cellID)
+        tableView.backgroundColor = UIColor.Theme.mediumBlue
         return tableView
     }()
     
@@ -50,7 +51,8 @@ class MealsViewController: UIViewController {
     // MARK: - UI Setup
     
     private func setUpUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.Theme.lightBlue
+        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([

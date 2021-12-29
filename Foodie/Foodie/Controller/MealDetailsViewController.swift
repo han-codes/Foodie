@@ -31,7 +31,8 @@ class MealDetailsViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.backgroundColor = .blue
+        stackView.backgroundColor = UIColor.Theme.mediumBlue
+        stackView.layer.cornerRadius = 10
         return stackView
     }()
     
@@ -40,7 +41,8 @@ class MealDetailsViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.backgroundColor = .red
+        stackView.backgroundColor = UIColor.Theme.mediumBlue
+        stackView.layer.cornerRadius = 10
         return stackView
     }()
     
@@ -49,6 +51,8 @@ class MealDetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Ingredients"
         label.textAlignment = .center
+        label.textColor = UIColor.Theme.darkBlue
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
@@ -58,6 +62,8 @@ class MealDetailsViewController: UIViewController {
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textColor = UIColor.Theme.darkBlue
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         return label
     }()
     
@@ -66,6 +72,8 @@ class MealDetailsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Instructions"
         label.textAlignment = .center
+        label.textColor = UIColor.Theme.darkBlue
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
@@ -75,6 +83,8 @@ class MealDetailsViewController: UIViewController {
         label.textAlignment = .left
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textColor = UIColor.Theme.darkBlue
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         return label
     }()
     
@@ -99,7 +109,7 @@ class MealDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.Theme.lightBlue
         navigationItem.title = mealDetails.name
         setUpUI()
     }

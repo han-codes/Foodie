@@ -22,6 +22,7 @@ class HomeViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Meal Categories"
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.textColor = UIColor.Theme.darkBlue
         return label
     }()
     
@@ -32,7 +33,7 @@ class HomeViewController: BaseViewController {
         tableView.dataSource = self
         tableView.layer.cornerRadius = 20
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        tableView.backgroundColor = .lightGray
+        tableView.backgroundColor = UIColor.Theme.mediumBlue
         tableView.register(ImageWithLabelTableViewCell.self, forCellReuseIdentifier: ImageWithLabelTableViewCell.cellID)
         return tableView
     }()
@@ -54,7 +55,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "LightBlue")
         setUpSubviews()
         setUpRandomMealAndCategories()
     }

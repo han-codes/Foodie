@@ -10,6 +10,7 @@
 		AE2A4CE927768A6C0040F0EF /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A4CE827768A6C0040F0EF /* MealsViewController.swift */; };
 		AE45A2A3277A7F870097F093 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45A2A2277A7F870097F093 /* SpinnerViewController.swift */; };
 		AE45A2A5277A80660097F093 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE45A2A4277A80660097F093 /* BaseViewController.swift */; };
+		F354A2D0277C10C600472404 /* UIColor+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F354A2CF277C10C600472404 /* UIColor+Convenience.swift */; };
 		F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396616C2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift */; };
 		F396616F2774053000FCDE31 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396616E2774053000FCDE31 /* Constants.swift */; };
 		F396617127742FDE00FCDE31 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396617027742FDE00FCDE31 /* WebService.swift */; };
@@ -51,6 +52,7 @@
 		AE2A4CE827768A6C0040F0EF /* MealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		AE45A2A2277A7F870097F093 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		AE45A2A4277A80660097F093 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F354A2CF277C10C600472404 /* UIColor+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Convenience.swift"; sourceTree = "<group>"; };
 		F396616C2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F396616E2774053000FCDE31 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F396617027742FDE00FCDE31 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				F3EC1AB127766057003AB645 /* JSONSerialization+Convenience.swift */,
+				F354A2CF277C10C600472404 /* UIColor+Convenience.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				F3A30D3B2773AADC00161F18 /* AppDelegate.swift in Sources */,
 				F3A30D3D2773AADC00161F18 /* SceneDelegate.swift in Sources */,
 				AE45A2A5277A80660097F093 /* BaseViewController.swift in Sources */,
+				F354A2D0277C10C600472404 /* UIColor+Convenience.swift in Sources */,
 				F3EC1AAB27750943003AB645 /* MealDetails.swift in Sources */,
 				F396616F2774053000FCDE31 /* Constants.swift in Sources */,
 			);

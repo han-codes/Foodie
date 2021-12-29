@@ -23,8 +23,9 @@ class ImageWithLabelTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Beef"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textAlignment = .left
+        label.textColor = UIColor.Theme.darkBlue
         return label
     }()
     

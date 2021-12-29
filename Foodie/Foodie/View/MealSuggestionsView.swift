@@ -24,6 +24,7 @@ class MealSuggestionsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Meal Suggestion"
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.textColor = UIColor.Theme.darkBlue
         return label
     }()
     
@@ -31,14 +32,15 @@ class MealSuggestionsView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 20
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor.Theme.mediumBlue
         return view
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.textColor = UIColor.Theme.darkBlue
         return label
     }()
     
@@ -46,7 +48,7 @@ class MealSuggestionsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("More Info", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(UIColor.Theme.darkBlue, for: .normal)
         button.addTarget(self, action: #selector(moreInfoButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -55,7 +57,7 @@ class MealSuggestionsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.triangle.2.circlepath.circle"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = UIColor.Theme.lightBlue
         button.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
         return button
     }()
