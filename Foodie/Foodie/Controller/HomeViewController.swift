@@ -126,7 +126,6 @@ class HomeViewController: BaseViewController {
     
     private func setUpMealCategories() {
         dispatchGroup.enter()
-        print("Dispatch group 2 enter")
         
         WebService.fetchMealCategories { [weak self] categories, error in
             guard let categories = categories, error == nil else {

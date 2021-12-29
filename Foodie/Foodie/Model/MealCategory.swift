@@ -10,7 +10,15 @@ import Foundation
 struct MealCategoryResponse: Decodable {
     let categories: [MealCategory]
     
-    // TODO: Sort categories alphabetically
+    enum CodingKeys: String, CodingKey {
+        case categories
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let rawCategories = try container.decode([MealCategory].self, forKey: .categories)
+        categories = rawCategories.sorted { $0.title < $1.title }
+    }
 }
 
 struct MealCategory: Decodable {

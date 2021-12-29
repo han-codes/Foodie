@@ -9,6 +9,16 @@ import Foundation
 
 struct MealResponse: Decodable {
     let meals: [Meal]
+    
+    enum CodingKeys: String, CodingKey {
+        case meals
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let rawMeals = try container.decode([Meal].self, forKey: .meals)
+        meals = rawMeals.sorted { $0.name < $1.name }
+    }
 }
 
 struct Meal: Decodable {
