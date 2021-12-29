@@ -41,10 +41,12 @@ class MealSuggestionsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textColor = UIColor.Theme.darkBlue
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
-    let seeDetailsButton: UIButton = {
+    let moreInfobutton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("More Info", for: .normal)
@@ -57,7 +59,7 @@ class MealSuggestionsView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "arrow.triangle.2.circlepath.circle"), for: .normal)
-        button.tintColor = UIColor.Theme.lightBlue
+        button.setTitleColor(UIColor.Theme.lightBlue, for: .normal)
         button.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -114,7 +116,7 @@ class MealSuggestionsView: UIView {
     private func addSubviews() {
         addSubview(headerLabel)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(seeDetailsButton)
+        contentView.addSubview(moreInfobutton)
         contentView.addSubview(refreshButton)
         contentView.addSubview(imageView)
         addSubview(contentView)
@@ -134,19 +136,17 @@ class MealSuggestionsView: UIView {
             
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: refreshButton.leadingAnchor, constant: 10),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: refreshButton.leadingAnchor, constant: -8),
             
             imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: seeDetailsButton.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: moreInfobutton.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            
-            seeDetailsButton.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            seeDetailsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            seeDetailsButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
-            seeDetailsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                        
+            moreInfobutton.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            moreInfobutton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            moreInfobutton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            moreInfobutton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             refreshButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             refreshButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),

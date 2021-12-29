@@ -13,6 +13,7 @@
 		F354A2D0277C10C600472404 /* UIColor+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F354A2CF277C10C600472404 /* UIColor+Convenience.swift */; };
 		F354A2D2277C1E5900472404 /* TitleAndDescriptionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F354A2D1277C1E5900472404 /* TitleAndDescriptionStackView.swift */; };
 		F3794355277CF74F0050E27A /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3794354277CF74F0050E27A /* UIImageView+Cache.swift */; };
+		F379435A277CFE160050E27A /* URL+QueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3794359277CFE160050E27A /* URL+QueryItem.swift */; };
 		F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396616C2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift */; };
 		F396616F2774053000FCDE31 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396616E2774053000FCDE31 /* Constants.swift */; };
 		F396617127742FDE00FCDE31 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396617027742FDE00FCDE31 /* WebService.swift */; };
@@ -58,6 +59,7 @@
 		F354A2CF277C10C600472404 /* UIColor+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Convenience.swift"; sourceTree = "<group>"; };
 		F354A2D1277C1E5900472404 /* TitleAndDescriptionStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndDescriptionStackView.swift; sourceTree = "<group>"; };
 		F3794354277CF74F0050E27A /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
+		F3794359277CFE160050E27A /* URL+QueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+QueryItem.swift"; sourceTree = "<group>"; };
 		F396616C2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F396616E2774053000FCDE31 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F396617027742FDE00FCDE31 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -108,6 +110,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3794356277CF9FE0050E27A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F396617027742FDE00FCDE31 /* WebService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F3794358277CFB620050E27A /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				F3EC1AAC27750E8C003AB645 /* CommonError.swift */,
+				F3AF42C6277CE55D00F17E3D /* RequestType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		F3A30D2E2773AADC00161F18 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +153,7 @@
 				F3A30D6A2773AEC700161F18 /* Model */,
 				F3A30D6B2773AECE00161F18 /* View */,
 				F3A30D6C2773AED200161F18 /* Controller */,
+				F3794356277CF9FE0050E27A /* Networking */,
 				F3A30D6E2773AF2500161F18 /* Utility */,
 				F3A30D6D2773AEDC00161F18 /* Supporting Files */,
 			);
@@ -205,9 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				F3AF42C5277CE54F00F17E3D /* Constants */,
+				F3794358277CFB620050E27A /* Enum */,
 				F3EC1AB027766037003AB645 /* Extensions */,
-				F396617027742FDE00FCDE31 /* WebService.swift */,
-				F3EC1AAC27750E8C003AB645 /* CommonError.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -216,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				F396616E2774053000FCDE31 /* Constants.swift */,
-				F3AF42C6277CE55D00F17E3D /* RequestType.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -227,6 +245,7 @@
 				F3EC1AB127766057003AB645 /* JSONSerialization+Convenience.swift */,
 				F354A2CF277C10C600472404 /* UIColor+Convenience.swift */,
 				F3794354277CF74F0050E27A /* UIImageView+Cache.swift */,
+				F3794359277CFE160050E27A /* URL+QueryItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,6 +385,7 @@
 				AE2A4CE927768A6C0040F0EF /* MealsViewController.swift in Sources */,
 				F3EC1AB227766057003AB645 /* JSONSerialization+Convenience.swift in Sources */,
 				AE45A2A3277A7F870097F093 /* SpinnerViewController.swift in Sources */,
+				F379435A277CFE160050E27A /* URL+QueryItem.swift in Sources */,
 				F3EC1AAF27751006003AB645 /* MealCategory.swift in Sources */,
 				F396616D2773FE9400FCDE31 /* ImageWithLabelTableViewCell.swift in Sources */,
 				F3EC1AA92775092F003AB645 /* Meal.swift in Sources */,

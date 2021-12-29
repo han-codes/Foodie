@@ -57,7 +57,7 @@ class HomeViewController: BaseViewController {
         
         view.backgroundColor = UIColor(named: "LightBlue")
         setUpSubviews()
-        setUpRandomMealAndCategories()
+        setUpMealSuggestionAndCategories()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,16 +91,16 @@ class HomeViewController: BaseViewController {
         ])
     }
     
-    private func setUpRandomMealAndCategories() {
+    private func setUpMealSuggestionAndCategories() {
         addSpinner()
-        setUpRandomMealDetails()
+        setUpMealSuggestion()
         setUpMealCategories()
         dispatchGroup.notify(queue: .main) {
             self.removeSpinner()
         }
     }
     
-    private func setUpRandomMealDetails() {
+    private func setUpMealSuggestion() {
         dispatchGroup.enter()
         
         WebService.fetchRandomMealDetails { [weak self] result in
@@ -206,6 +206,6 @@ extension HomeViewController: MoreInfoButtonPressable {
 
 extension HomeViewController: RefreshButtonPressable {
     func refresh() {
-        setUpRandomMealDetails()
+        setUpMealSuggestion()
     }
 }

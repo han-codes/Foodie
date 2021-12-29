@@ -25,18 +25,14 @@ struct Constants {
         
         struct URLs {
             static func lookupMealURL(usingID id: String) -> URL? {
-                let queryItems = [URLQueryItem(name: "i", value: id)]
-                var urlComponents = URLComponents(string: baseURL + Path.lookup)
-                urlComponents?.queryItems = queryItems
-                let url = urlComponents?.url
+                var url = URL(string: baseURL + Path.lookup)
+                url?.append(queryItem: "i", value: id)
                 return url
             }
             
             static func lookupMealsByCategoryURL(_ category: String) -> URL? {
-                let queryItems = [URLQueryItem(name: "c", value: category)]
-                var urlComponents = URLComponents(string: baseURL + Path.filter)
-                urlComponents?.queryItems = queryItems
-                let url = urlComponents?.url
+                var url = URL(string: baseURL + Path.filter)
+                url?.append(queryItem: "c", value: category)
                 return url
             }
         }
